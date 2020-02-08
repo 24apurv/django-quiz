@@ -1,16 +1,28 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from .models import Answer, Question, Result, MyUser
 from .forms import MyUserForm
 from django.contrib import messages
 
 def login(request):
+	flag = False
 	form = MyUserForm(request.POST or None)
 	if request.method == 'POST' :
 		if form.is_valid():
 			user = form.save()
-			request.session['user_id'] = user.id
-			messages.success(request, 'User logged in - {}'.format(user.id))
-			return render(request, 'login.html')
+			flag = True
+	if flag:
+		return redirect('take_quiz', user.id)
 	else:	
 		context = {'form' : form}
 		return render(request, 'login.html', context)
+
+
+def take_quiz(request, user_id=None):
+	try:
+		user = MyUser.objects.get(pk=user_id)
+	except:
+		return redirect('login')
+	questions = Answer.objects.all()
+	context = {'questions' : questions}
+	return render(request, 'quiz.html', context)
