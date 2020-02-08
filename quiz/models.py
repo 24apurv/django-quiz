@@ -3,8 +3,7 @@ from django.core.validators import RegexValidator
 
 
 class MyUser(models.Model):
-	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
- 								message="Phone number must be entered in the format: '+999999999'")
+	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be valid")
 	name_1 = models.CharField(max_length=100, verbose_name='Participant 1 Name')
 	email_1 = models.EmailField(unique=True, verbose_name='Participant 1 Email')
 	phone_number_1 = models.CharField(validators=[phone_regex], max_length=17, blank=False, verbose_name='Participant 1 Phone Number')

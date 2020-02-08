@@ -8,9 +8,29 @@
 body {
   background-image: url({% static 'images/login-background.jpg' %});
 }
-</style>
+</style> 
 {% endblock %}
 
 {% block body %}
-{{ form.as_p }}
+<br>
+<br>
+<div class='container'>
+	<div class="row justify-content-center">
+	<div class="col-mx-auto">
+	<div class="card bg-dark text-white" style="width: 40rem;">
+		<!--<img src="..." class="card-img-top" alt="...">-->
+	  	<div class="card-body">
+	    	<center><h2 class="card-title">Login</h2></center></br>
+		    	<form method="POST"> {% csrf_token %}
+					{% load crispy_forms_tags %}
+					{{ form|crispy }}
+					<br>
+					<center><button type="submit" class="btn btn-primary">Submit</button></center>
+					<br>
+				</form>
+	 	 </div>
+	</div>
+	</div>
+	</div>
+</div>
 {% endblock %}
