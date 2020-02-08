@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block additional_head_content %}
+{% load static %}
+<style>
+body {
+  background-image: url({% static 'images/login-background.jpg' %});
+}
+</style>
+{% endblock %}
+
+{% block body %}
+{{ form.as_p }}
+{% endblock %}
