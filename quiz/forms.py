@@ -21,7 +21,7 @@ class QuizForm(forms.Form):
 				('C', question.option_c),
 				('D', question.option_d),
 			]
-			self.fields[question.question.statement] = forms.ChoiceField(required=False, choices=CHOICES, widget=widgets.RadioSelect)
+			self.fields[question.question.statement] = forms.ChoiceField(required=False, choices=CHOICES, widget=widgets.RadioSelect)			
 
 	def answers(self):
 		for name, question in self.cleaned_data.items():

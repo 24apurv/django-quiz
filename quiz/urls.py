@@ -17,13 +17,14 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings 
 from django.conf.urls.static import static 
-from .views import login, take_quiz, instructions
+from .views import login, take_quiz, instructions, finish
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', login, name='login'),
     path('quiz/?P<user_id>', take_quiz, name='take_quiz'),
-    path('instructions/?P<user_id>', instructions, name='instructions')
+    path('instructions/?P<user_id>', instructions, name='instructions'),
+    path('finish/', finish, name='finish'),
 ]
 
 if settings.DEBUG:

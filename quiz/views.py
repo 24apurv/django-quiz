@@ -27,6 +27,7 @@ def take_quiz(request, user_id=None):
 		return redirect('login')
 	questions = Answer.objects.all()
 	form = QuizForm(request.POST or None, questions=questions)
+	flag = False
 	if request.method == 'POST':
 		if form.is_valid():
 			score = 0
@@ -37,7 +38,11 @@ def take_quiz(request, user_id=None):
 					score = score+1
 			result = Result(user=user, score=score)
 			result.save()
-	context = {'questions' : questions, 'form':form}
+			flag = True
+	if flag:
+		return redirect('finish')
+	content = zip(questions, form)
+	context = {'content':content}
 	return render(request, 'quiz.html', context)
 
 
@@ -53,6 +58,12 @@ def instructions(request, user_id=None):
 	'Do not close or refresh the quiz window',
 	'There will be 30 questions carrying 1 mark each',
 	]
-	context = {'instructions':instructions}
+	context = {'instructions':instructions, 'time':1}
 	return render(request, 'instructions.html', context)
+
+
+def finish(request):
+	if request.method == 'POST':
+		return redirect('login')
+	return render(request, 'finish.html') 
 

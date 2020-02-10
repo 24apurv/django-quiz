@@ -9,21 +9,58 @@ body {
   background-image: url({% static 'images/background.jpg' %});
 }
 </style> 
+<script type="text/javascript">
+window.onload = function begin(){
+document.getElementById('timer').innerHTML =
+  30 + ":" + 00;
+startTimer();
+}
+
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
+  if(m<0){
+    document.getElementById('quiz').submit();
+  }
+  document.getElementById('timer').innerHTML =
+    m + ":" + s;
+  setTimeout(startTimer, 1000);
+}
+
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec}; // add zero in front of numbers < 10
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
+</script>
 {% endblock %}
 
 {% block body %}
+<div class='float-right sticky-top'>
+	<div class="row justify-content-left">
+		<div class="col-mx-auto">
+			<div class="alert alert-success" role="alert"><center>Time left : <span id="timer"></span></center></div>
+		</div>
+	</div>
+</div>
 <br>
 <br>
-<form method="POST"> {% csrf_token %}
+<form method="POST" id='quiz'> {% csrf_token %}
 {% load crispy_forms_tags %}
-{% for field in form %}
+{% for question,field in content %}
 <div class='container'>
 	<div class="row justify-content-center">
 		<div class="col-mx-auto">
 			<div class="card bg-dark text-white" style="width: 40rem;">
 			  	<div class="card-body">
 			    	<center><h5 class="card-title">Question {{ forloop.counter }}</h5></center></br>
-						{{ field | as_crispy_field }}
+			    	{% if question.question.has_image %}
+						<img src="{{ question.question.img.url }}" class="img-responsive" width="100%"/>
+					{% endif %}
+					{{ field | as_crispy_field }}
 			 	</div>
 			</div>
 		</div>
@@ -35,4 +72,6 @@ body {
 <br>
 <br>
 {% endblock %}
+
+
 
