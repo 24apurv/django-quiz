@@ -16,14 +16,13 @@ class QuizForm(forms.Form):
 		super().__init__(*args, **kwargs)
 		for i, question in enumerate(questions):
 			CHOICES = [
-				('a', question.option_a),
-				('b', question.option_b), 
-				('c', question.option_c),
-				('d', question.option_d),
+				('A', question.option_a),
+				('B', question.option_b), 
+				('C', question.option_c),
+				('D', question.option_d),
 			]
-			self.fields[question.question.statement] = forms.ChoiceField(choices=CHOICES, widget=widgets.RadioSelect)
+			self.fields[question.question.statement] = forms.ChoiceField(required=False, choices=CHOICES, widget=widgets.RadioSelect)
 
 	def answers(self):
 		for name, question in self.cleaned_data.items():
-			if name.startswith('question_'):
-				yield(self.fields[name].label, value)
+			yield(name, question)

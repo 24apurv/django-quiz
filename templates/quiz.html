@@ -2,7 +2,37 @@
 
 {% block title %}Quiz{% endblock %}
 
+{% block additional_head_content %}
+{% load static %}
+<style>
+body {
+  background-image: url({% static 'images/background.jpg' %});
+}
+</style> 
+{% endblock %}
+
 {% block body %}
-{{ form.as_p }}
+<br>
+<br>
+<form method="POST"> {% csrf_token %}
+{% load crispy_forms_tags %}
+{% for field in form %}
+<div class='container'>
+	<div class="row justify-content-center">
+		<div class="col-mx-auto">
+			<div class="card bg-dark text-white" style="width: 40rem;">
+			  	<div class="card-body">
+			    	<center><h5 class="card-title">Question {{ forloop.counter }}</h5></center></br>
+						{{ field | as_crispy_field }}
+			 	</div>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br>
+{% endfor %}
+<center><button type="submit" class="btn btn-primary">Submit</button></center>
+<br>
+<br>
 {% endblock %}
 

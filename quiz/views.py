@@ -28,8 +28,15 @@ def take_quiz(request, user_id=None):
 	questions = Answer.objects.all()
 	form = QuizForm(request.POST or None, questions=questions)
 	if request.method == 'POST':
-		for (question, answer) in form.answers():
-			pass
+		if form.is_valid():
+			score = 0
+			for (quiz_question, answer) in form.answers():
+				question = Question.objects.get(statement=quiz_question)
+				correct_answer = Answer.objects.get(question=question).correct_answer
+				if answer == correct_answer:
+					score = score+1
+			result = Result(user=user, score=score)
+			result.save()
 	context = {'questions' : questions, 'form':form}
 	return render(request, 'quiz.html', context)
 

@@ -24,7 +24,7 @@ class Result(models.Model):
 	score = models.IntegerField(null=False)
 
 	def __str__(self):
-		return self.user
+		return str(self.user)
 
 
 class Question(models.Model):
