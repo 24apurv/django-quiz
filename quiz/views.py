@@ -6,14 +6,15 @@ from django.contrib import messages
 
 def login(request):
 	flag = False
-	form = MyUserForm(request.POST or None)
 	if request.method == 'POST' :
+		form = MyUserForm(request.POST, request.FILES)
 		if form.is_valid():
 			user = form.save()
 			flag = True
 	if flag:
 		return redirect('take_quiz', user.id)
-	else:	
+	else:
+		form = MyUserForm()
 		context = {'form' : form}
 		return render(request, 'login.html', context)
 

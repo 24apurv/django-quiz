@@ -30,6 +30,8 @@ class Result(models.Model):
 class Question(models.Model):
 	statement = models.CharField(max_length=500, verbose_name='Question statement')
 	is_active = models.BooleanField(default=True, verbose_name='Active', help_text='Should question be included in quiz?')
+	img = models.ImageField(upload_to='images/', null=True)
+	has_image = models.BooleanField(default=False, verbose_name='Image', help_text='Does question have image?')
 
 	def __str__(self):
 		return self.statement

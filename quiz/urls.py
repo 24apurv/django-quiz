@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings 
+from django.conf.urls.static import static 
 from .views import login, take_quiz
 
 urlpatterns = [
@@ -22,3 +24,7 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('quiz/?P<user_id>', take_quiz, name='take_quiz'),
 ]
+
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
