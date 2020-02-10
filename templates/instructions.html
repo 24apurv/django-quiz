@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Instructions{% endblock %}
 
 {% block additional_head_content %}
 {% load static %}
@@ -20,14 +20,17 @@ body {
 			<div class="card bg-dark text-white" style="width: 40rem;">
 				<!--<img src="..." class="card-img-top" alt="...">-->
 			  	<div class="card-body">
-			    	<center><h2 class="card-title">Login</h2></center></br>
-				    <form method="POST"> {% csrf_token %}
-						{% load crispy_forms_tags %}
-						{{ form|crispy }}
-						<br>
-						<center><button type="submit" class="btn btn-primary">Submit</button></center>
-						<br>
-					</form>
+			    	<center><h2 class="card-title">Instructions</h2></center></br>
+			    	<ol>
+			    		{% for instruction in instructions %}
+			    		<li> {{ instruction }} </li>
+			    		{% endfor %}
+			    	</ol>
+			    	<br>
+			    	<form method="POST"> {% csrf_token %}
+			    		<center><button type="submit" class="btn btn-primary">Submit</button></center>
+			    	</form>
+			    	<br>
 			 	</div>
 			</div>
 		</div>
