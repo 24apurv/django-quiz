@@ -25,8 +25,13 @@ def take_quiz(request, user_id=None):
 		user = MyUser.objects.get(pk=user_id)
 	except:
 		return redirect('login')
-	questions = Answer.objects.all()
-	questions.order_by('?')
+	c_questions = Question.objects.filter(category='C').order_by('?')[0:10]
+	cpp_questions = Question.objects.filter(category='C++').order_by('?')[0:10]
+	questions_obj = c_questions | cpp_questions
+	id_list = []
+	for question_obj in questions_obj:
+		id_list.append(question_obj.id)
+	questions = Answer.objects.filter(question__id__in=id_list).order_by('?')
 	form = QuizForm(request.POST or None, questions=questions)
 	flag = False
 	if request.method == 'POST':
