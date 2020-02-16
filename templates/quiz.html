@@ -60,6 +60,8 @@ function checkSecond(sec) {
 			    	{% if question.question.has_image %}
 						<img src="{{ question.question.img.url }}" class="img-responsive" width="100%"/>
 					{% endif %}
+					{{ field.label_tag | linebreaksbr }}
+					<br>
 					{{ field | as_crispy_field }}
 			 	</div>
 			</div>

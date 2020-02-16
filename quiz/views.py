@@ -26,6 +26,7 @@ def take_quiz(request, user_id=None):
 	except:
 		return redirect('login')
 	questions = Answer.objects.all()
+	questions.order_by('?')
 	form = QuizForm(request.POST or None, questions=questions)
 	flag = False
 	if request.method == 'POST':

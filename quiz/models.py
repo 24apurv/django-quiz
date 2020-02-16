@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from django import forms
+from django.contrib import admin
 
 
 class MyUser(models.Model):
@@ -28,13 +30,21 @@ class Result(models.Model):
 
 
 class Question(models.Model):
-	statement = models.CharField(max_length=500, verbose_name='Question statement')
+	CATEGORY_CHOICES = [('C++','C++'),('C','C')]
+
+	statement = models.CharField(max_length=700, verbose_name='Question statement')
 	is_active = models.BooleanField(default=True, verbose_name='Active', help_text='Should question be included in quiz?')
 	img = models.ImageField(upload_to='images/', null=True, blank=True)
 	has_image = models.BooleanField(default=False, verbose_name='Image', help_text='Does question have image?')
+	category = models.CharField(max_length=5, default='C++', verbose_name='Category', choices=CATEGORY_CHOICES)
 
 	def __str__(self):
 		return self.statement
+
+class AdminQuestion(admin.ModelAdmin):
+	formfield_overrides = {
+		models.CharField: {'widget': forms.Textarea},
+    }
 
 
 ANSWER_CHOICES = [
