@@ -63,3 +63,13 @@ class Answer(models.Model):
 
 	def __str__(self):
 		return self.question.statement
+
+
+class UserAnswer(models.Model):
+	user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
+	questions = models.CharField(max_length=500, null=True, blank=True)
+	answers = models.CharField(max_length=500, null=True, blank=True)
+
+	def __str__(self):
+		return str(self.user)
+

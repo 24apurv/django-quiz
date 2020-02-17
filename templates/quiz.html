@@ -48,8 +48,7 @@ function checkSecond(sec) {
 </div>
 <br>
 <br>
-<form method="POST" id='quiz'> {% csrf_token %}
-{% load crispy_forms_tags %}
+<form action="" method="POST" id="quiz"> {% csrf_token %}
 {% for question,field in content %}
 <div class='container'>
 	<div class="row justify-content-center">
@@ -60,9 +59,10 @@ function checkSecond(sec) {
 			    	{% if question.question.has_image %}
 						<img src="{{ question.question.img.url }}" class="img-responsive" width="100%"/>
 					{% endif %}
-					{{ field.label_tag | linebreaksbr }}
+					{{ question.question.statement | linebreaksbr }}
 					<br>
-					{{ field | as_crispy_field }}
+					{% load crispy_forms_tags %}
+					{{ field | as_crispy_field | safe }}
 			 	</div>
 			</div>
 		</div>
@@ -70,7 +70,8 @@ function checkSecond(sec) {
 </div>
 <br><br>
 {% endfor %}
-<center><button type="submit" class="btn btn-primary">Submit</button></center>
+<center><input type="submit" value="Submit" class="btn btn-primary"></center>
+</form>
 <br>
 <br>
 {% endblock %}

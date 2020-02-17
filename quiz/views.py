@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .models import Answer, Question, Result, MyUser
+from .models import Answer, Question, Result, MyUser, UserAnswer
 from .forms import MyUserForm, QuizForm
 from django.contrib import messages
 from django.conf import settings 
@@ -29,25 +29,31 @@ def take_quiz(request, user_id=None):
 	cpp_questions = Question.objects.filter(category='C++').order_by('?')[0:10]
 	questions_obj = c_questions | cpp_questions
 	id_list = []
-	for question_obj in questions_obj:
-		id_list.append(question_obj.id)
-	questions = Answer.objects.filter(question__id__in=id_list).order_by('?')
+	if request.session.get('questions'):
+		id_list = request.session['questions']
+	else:
+		for question_obj in questions_obj:
+			id_list.append(question_obj.id)
+	print(len(id_list))
+	print(id_list)
+	questions = Answer.objects.filter(question_id__in=id_list)
+	print(questions.count())
 	form = QuizForm(request.POST or None, questions=questions)
 	flag = False
 	if request.method == 'POST':
 		if form.is_valid():
-			score = 0
+			questions_list = []
+			answers_list = []
 			for (quiz_question, answer) in form.answers():
-				question = Question.objects.get(statement=quiz_question)
-				correct_answer = Answer.objects.get(question=question).correct_answer
-				if answer == correct_answer:
-					score = score+1
-			result = Result(user=user, score=score)
-			result.save()
+				questions_list.append(quiz_question)
+				answers_list.append(answer)
+			user_answers = UserAnswer(user=user, questions=','.join(questions_list), answers=','.join(answers_list))
+			user_answers.save()
 			flag = True
 	if flag:
 		return redirect('finish')
 	content = zip(questions, form)
+	request.session['questions'] = id_list
 	context = {'content':content}
 	return render(request, 'quiz.html', context)
 
