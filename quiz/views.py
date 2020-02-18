@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .models import Answer, Question, Result, MyUser, UserAnswer
+from .models import Answer, Question, MyUser, UserAnswer
 from .forms import MyUserForm, QuizForm
 from django.contrib import messages
 from django.conf import settings 

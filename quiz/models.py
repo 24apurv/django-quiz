@@ -20,15 +20,6 @@ class MyUser(models.Model):
 		else:
 			return self.name_1
 
-
-class Result(models.Model):
-	user = models.OneToOneField(MyUser, on_delete=models.CASCADE)
-	score = models.IntegerField(null=False)
-
-	def __str__(self):
-		return str(self.user)
-
-
 class Question(models.Model):
 	CATEGORY_CHOICES = [('C++','C++'),('C','C')]
 
