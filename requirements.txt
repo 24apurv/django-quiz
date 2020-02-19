@@ -3,11 +3,13 @@ django-crispy-forms==1.8.1
 django-extensions==2.2.8
 et-xmlfile==1.0.1
 jdcal==1.4.1
+lxml==4.5.0
 numpy==1.18.1
 openpyxl==3.0.3
 pandas==1.0.1
 Pillow==7.0.0
 python-dateutil==2.8.1
+python-docx==0.8.10
 pytz==2019.3
 six==1.14.0
 sqlparse==0.3.0

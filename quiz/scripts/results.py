@@ -1,5 +1,6 @@
 from quiz.models import MyUser, UserAnswer, Answer
 import pandas as pd
+import numpy as np
 
 def run():
 	userAnswers = UserAnswer.objects.all()
@@ -14,5 +15,6 @@ def run():
 				score = score+1
 		data[str(userAnswer.user)] = score
 	sorted_data = sorted(data.items(), key=lambda x: x[1], reverse=True)
-	dataframe = pd.DataFrame(data=sorted_data)
+	dataframe = pd.DataFrame(data=sorted_data, columns=['Participant', 'Score'])
+	dataframe.index = np.arange(1, len(dataframe)+1)
 	dataframe.to_excel("results.xlsx")
