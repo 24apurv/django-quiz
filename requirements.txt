@@ -13,3 +13,4 @@ python-docx==0.8.10
 pytz==2019.3
 six==1.14.0
 sqlparse==0.3.0
+whitenoise==5.0.1

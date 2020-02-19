@@ -34,10 +34,7 @@ def take_quiz(request, user_id=None):
 	else:
 		for question_obj in questions_obj:
 			id_list.append(question_obj.id)
-	print(len(id_list))
-	print(id_list)
 	questions = Answer.objects.filter(question_id__in=id_list)
-	print(questions.count())
 	form = QuizForm(request.POST or None, questions=questions)
 	flag = False
 	if request.method == 'POST':
@@ -51,6 +48,7 @@ def take_quiz(request, user_id=None):
 			user_answers.save()
 			flag = True
 	if flag:
+		request.session.clear()
 		return redirect('finish')
 	content = zip(questions, form)
 	request.session['questions'] = id_list
