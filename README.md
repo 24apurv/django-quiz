@@ -14,8 +14,10 @@ A quiz application created in django to conduct mcq quizzes. The application has
   `virtualenv django-quiz --python python3 && cd django-quiz`
 5) Clone git repository into src folder and cd into it `git clone <url> src && cd src`
 6) Install requirements `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
-7) Run using `python manage.py runserver`
-8) Create superuser to log into admin `python manage.py createsuperuser`
+7) Make appropriate changes to settings module and make migrations using `python manage.py makemigrations` and then 
+  `python manage.py migrate`
+8) Run using `python manage.py runserver`
+9) Create superuser to log into admin `python manage.py createsuperuser`
 
 # Implementation
 1) Add questions from admin
