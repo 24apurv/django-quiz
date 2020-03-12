@@ -13,4 +13,15 @@ A quiz application created in django to conduct mcq quizzes. The application has
 4) Create virtual environment and cd into it
   `virtualenv django-quiz --python python3 && cd django-quiz`
 5) Clone git repository into src folder and cd into it `git clone <url> src && cd src`
-6) Install requirements 
+6) Install requirements `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
+7) Run using `python manage.py runserver`
+8) Create superuser to log into admin `python manage.py createsuperuser`
+
+# Implementation
+1) Add questions from admin
+2) Conduct the quiz
+3) To get results, run the results script `python manage.py runscript -v2 results`
+4) To send reviews, run the reviews script `python manage.py runscript -v2 reviews`
+  WARNING : Reviews script will send emails to all participants.
+            Make sure to update email settings in settings module.
+            Try not to use fake emails to avoid sending emails to random people.
