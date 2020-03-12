@@ -5,6 +5,7 @@ from .forms import MyUserForm, QuizForm
 from django.contrib import messages
 from django.conf import settings 
 
+#Login creates user from input of form and redirects to instructions page
 def login(request):
 	flag = False
 	if request.method == 'POST' :
@@ -21,6 +22,11 @@ def login(request):
 
 
 def take_quiz(request, user_id=None):
+	'''
+	User is taken from parameter. Questions are pulled from db according to category in random order.
+	Questions are added to session. Form is created from questions array and quiz is created.
+	Results are computed using a script so after submission, redirect to finish page.
+	'''
 	try:
 		user = MyUser.objects.get(pk=user_id)
 	except:
@@ -56,6 +62,7 @@ def take_quiz(request, user_id=None):
 	return render(request, 'quiz.html', context)
 
 
+#Instructions page. Redirects to quiz page.
 def instructions(request, user_id=None):
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -72,6 +79,7 @@ def instructions(request, user_id=None):
 	return render(request, 'instructions.html', context)
 
 
+#Finish page. Redirects to login page.
 def finish(request):
 	if request.method == 'POST':
 		return redirect('login')

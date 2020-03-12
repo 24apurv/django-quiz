@@ -4,11 +4,15 @@ from docx import Document
 from docx.shared import Inches
 
 def run():
+	'''
+	This script creates an analysis of the answers given by the participants and mails it to them.
+	The analysis contains question, options, given answer and actual answer.
+	'''
 	userAnswers = UserAnswer.objects.all()
 	try:
 		for userAnswer in userAnswers:
 			document = Document()
-			document.add_heading('Code Marshal MCQ Round Review', 0)
+			document.add_heading('MCQ Review', 0)
 			questions = userAnswer.questions.split(',')
 			answers = userAnswer.answers.split(',')
 			for i,question_id in enumerate(questions):
@@ -29,9 +33,9 @@ def run():
 			else:
 				email_id = [userAnswer.user.email_1]
 			email = EmailMessage(
-				'Review for Code Marshal',
-				'PFA file containing review for MCQ round of Code Marshal at Dexterity 2020', 
-				'Team Code Marshal',
+				'Review for Quiz',
+				'PFA file containing review for MCQ Quiz', 
+				'Team Django-Quiz',
 				email_id,
 			)
 			email.attach_file('review.docx')

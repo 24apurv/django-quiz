@@ -23,7 +23,7 @@ from .views import login, take_quiz, instructions, finish
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('', login, name='login'),
-    path('quiz/?P<user_id>', take_quiz, name='take_quiz'),
+    path('quiz/?P<user_id>', take_quiz, name='take_quiz'),  #takes user_id as parameter instead of using session or cookies
     path('instructions/?P<user_id>', instructions, name='instructions'),
     path('finish/', finish, name='finish'),
 ]

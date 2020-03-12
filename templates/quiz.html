@@ -1,3 +1,8 @@
+<!--
+	Quiz template
+-->
+
+
 {% extends 'base.html' %}
 
 {% block title %}Quiz{% endblock %}
@@ -9,6 +14,11 @@ body {
   background-image: url({% static 'images/background.jpg' %});
 }
 </style> 
+
+<!--
+	JavaScript code to add timer for quiz. Value is set to 30 mins. Can be changed from here.
+-->
+
 <script type="text/javascript">
 window.onload = function begin(){
 document.getElementById('timer').innerHTML =

@@ -3,7 +3,7 @@ from django.core.validators import RegexValidator
 from django import forms
 from django.contrib import admin
 
-
+#Model for user ie. participant
 class MyUser(models.Model):
 	phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be valid")
 	name_1 = models.CharField(max_length=100, verbose_name='Participant 1 Name')
@@ -20,6 +20,7 @@ class MyUser(models.Model):
 		else:
 			return self.name_1
 
+#Model for question
 class Question(models.Model):
 	CATEGORY_CHOICES = [('C++','C++'),('C','C')]
 
@@ -44,6 +45,7 @@ ANSWER_CHOICES = [
 	('C','C'),
 	('D','D'),
 	]	
+#Model for Answer which contains options and foreign ket to question 
 class Answer(models.Model):
 	question = models.ForeignKey(Question, on_delete=models.CASCADE)
 	option_a = models.CharField(max_length=500, blank=False, null=False, verbose_name='Option A')
@@ -55,7 +57,7 @@ class Answer(models.Model):
 	def __str__(self):
 		return self.question.statement
 
-
+#Model to store answers given by participant. Stored in the form of comma-separated string
 class UserAnswer(models.Model):
 	user = models.ForeignKey(MyUser, on_delete=models.CASCADE)
 	questions = models.CharField(max_length=500, null=True, blank=True)

@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'chjb*^!n_khq$escr+xyc!a0$s_25y8a9niz-)0-0zf@dq6br7'
+SECRET_KEY = '' #Sorry, its supposed to be secret
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.0.116']
+ALLOWED_HOSTS = [] #Add ip address of host here
 
 
 # Application definition
@@ -62,11 +62,11 @@ MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'codemarshal.dexterity2020@gmail.com'
-EMAIL_HOST_PASSWORD = 'codemarshal@dex2020'
+EMAIL_HOST = '' #Add smpt host
+EMAIL_HOST_USER = ''    #Add email host user ie. email id
+EMAIL_HOST_PASSWORD = '' #Add password
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'Team Code Marshal <codemarshal.dexterity2020@gmail.com>'
+DEFAULT_FROM_EMAIL = '' #Add from or sender name in format 'sender-name <sender-email>'
 
 TEMPLATES = [
     {
