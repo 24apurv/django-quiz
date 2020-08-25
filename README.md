@@ -27,3 +27,5 @@ A quiz application created in django to conduct mcq quizzes. The application has
   WARNING : Reviews script will send emails to all participants.
             Make sure to update email settings in settings module.
             Try not to use fake emails to avoid sending emails to random people.
+            
+            
