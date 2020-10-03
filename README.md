@@ -1,3 +1,5 @@
+[![DeepSource](https://deepsource.io/gh/24apurv/django-quiz.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/24apurv/django-quiz/?ref=repository-badge)
+
 # Django Quiz Application
 A quiz application created in django to conduct mcq quizzes. The application has the following features : 
 1) Add/update/delete questions from admin.
